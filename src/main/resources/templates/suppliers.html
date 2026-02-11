@@ -10,6 +10,14 @@
     <div th:each="suppliers : ${suppliers}"
          th:style="'border: 1px solid; padding: 10px; width: 200px; background-color: #f0f0f0;'">
         <p th:text="${suppliers.companyName} + ' - ' + ${suppliers.country}"></p>
+        <div>
+            <a th:href="@{/suppliers/{id}(id=${suppliers.id})}">Show info</a>
+            <form th:action="@{/suppliers/{id}(id=${suppliers.id})}"
+                  method="post">
+                <input type="hidden" name="_method" value="delete"/>
+                <button type="submit">Delete</button>
+            </form>
+        </div>
     </div>
 </section>
 </body>

@@ -56,4 +56,11 @@ public class SupplierController {
         Supplier updatedSupplier = supplierService.updateSupplier(id, supp);
         return "redirect:/suppliers/" + updatedSupplier.getId();
     }
+
+    // Endpoint to handle the deletion of a supplier
+    @DeleteMapping("/{id}")
+    public String deleteSupplier(@PathVariable Long id) {
+        supplierService.deleteSupplier(id);
+        return "redirect:/suppliers";
+    }
 }
