@@ -1,9 +1,9 @@
 package org.iths.techstore.Controller;
 
+import org.iths.techstore.Model.Supplier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/supplier")
@@ -15,9 +15,33 @@ public class SupplierController {
         this.supplierService = supplierService;
     }
 
+    // Root endpoint for suppliers
     @GetMapping
     public String showSupplierPage(Model model) {
         model.addAttribute("suppliers", supplierService.getAllSuppliers());
+        return "suppliers";
+    }
+
+    // Endpoint to show the details of a specific supplier
+    @GetMapping("/{id}")
+    public String getSupplier(@PathVariable Long id, Model model) {
+        model.addAttribute("supplier", supplierService.getSupplierById(id));
         return "supplier";
     }
+
+    // Endpoint to show the form for creating a new supplier
+    @GetMapping("/new")
+    public String showNewSupplierForm() {
+        return "new-supplier";
+    }
+
+    // Endpoint to handle the submission of the new supplier form
+    @PostMapping
+    public String createSupplier(@ModelAttribute Supplier supp) {
+        Supplier supp2 = supplierService.createSupplier(supp);
+
+        return "redirect:/suppliers/" + supp2.getId();
+    }
+
+
 }

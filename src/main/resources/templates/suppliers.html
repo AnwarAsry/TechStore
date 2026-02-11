@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TechStore - Suppliers</title>
+</head>
+<body>
+<h3>Suppliers</h3>
+<section th:style="'display: flex; flex: flex-wrap; gap: 10px;'">
+    <div th:each="suppliers : ${suppliers}"
+         th:style="'border: 1px solid; padding: 10px; width: 200px; background-color: #f0f0f0;'">
+        <p th:text="${suppliers.companyName} + ' - ' + ${suppliers.country}"></p>
+    </div>
+</section>
+</body>
+</html>

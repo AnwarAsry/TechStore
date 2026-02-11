@@ -2,15 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TechStore - Suppliers</title>
+    <title th:text="'TechStore - ' + ${supplier.companyName}"></title>
 </head>
 <body>
-<h3>Suppliers</h3>
-<section th:style="'display: flex; flex: flex-wrap; gap: 10px;'">
-    <div th:each="suppliers : ${suppliers}"
-         th:style="'border: 1px solid; padding: 10px; width: 200px; background-color: #f0f0f0;'">
-        <p th:text="${suppliers.companyName} + ' - ' + ${suppliers.country}"></p>
-    </div>
-</section>
+<h3 th:text="${supplier.companyName}"></h3>
+<p><strong>Contact Name:</strong> <span th:text="${supplier.contactPerson}"></span></p>
+<p><strong>Contact email:</strong> <span th:text="${supplier.email}"></span></p>
+<p><strong>Country:</strong> <span th:text="${supplier.country}"></span></p>
 </body>
 </html>
