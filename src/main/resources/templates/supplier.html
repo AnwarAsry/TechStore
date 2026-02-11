@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'TechStore - ' + ${supplier.companyName}"></title>
+</head>
+<body>
+<h3 th:text="${supplier.companyName}"></h3>
+<p><strong>Contact Name:</strong> <span th:text="${supplier.contactPerson}"></span></p>
+<p><strong>Contact email:</strong> <span th:text="${supplier.email}"></span></p>
+<p><strong>Country:</strong> <span th:text="${supplier.country}"></span></p>
+<a th:href="@{/suppliers/{id}/edit(id=${suppliers.id})}">Edit Supplier</a>
+<form th:action="@{/suppliers/{id}(id=${suppliers.id})}"
+      method="post">
+    <input type="hidden" name="_method" value="delete"/>
+    <button type="submit">Delete</button>
+</form>
+</body>
+</html>
