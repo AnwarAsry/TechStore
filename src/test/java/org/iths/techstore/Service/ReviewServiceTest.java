@@ -1,7 +1,9 @@
 package org.iths.techstore.Service;
 
+import org.iths.techstore.Exceptions.ReviewNotValidException;
 import org.iths.techstore.Model.Review;
 import org.iths.techstore.Repository.ReviewRepository;
+import org.iths.techstore.Validator.ReviewValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,8 +15,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ReviewServiceTest {
@@ -22,6 +24,11 @@ public class ReviewServiceTest {
     @Mock
     ReviewRepository reviewRepository;
 
+    // Validator
+    @Mock
+    ReviewValidator reviewValidator;
+
+    // Inject service
     @InjectMocks
     ReviewService reviewService;
 
@@ -63,6 +70,7 @@ public class ReviewServiceTest {
     public void createReviewShouldSaveReview() {
         // Arrange
         Review review = new Review(1L, "Samsung", 9, "Great phone", LocalDate.now(), "Psy");
+        doNothing().when(reviewValidator).validate(review);
         when(reviewRepository.save(review)).thenReturn(review);
 
         // Act
@@ -70,7 +78,20 @@ public class ReviewServiceTest {
 
         // Assert
         assertEquals(review, result);
+        verify(reviewValidator).validate(review);
         verify(reviewRepository).save(review);
+    }
+
+    // Create review - Invalid input
+    @Test
+    public void createReviewShouldThrowExceptionWhenInvalid() {
+        // Arrange
+        Review review = new Review(1L, "Samsung", 0, "Very bad rating", LocalDate.now(), "Psy");
+
+        doThrow(new ReviewNotValidException("Not valid input")).when(reviewValidator).validate(review);
+
+        // Act / Assert
+        assertThrows(ReviewNotValidException.class, () -> reviewService.createReview(review));
     }
 
     // Update review
@@ -78,6 +99,7 @@ public class ReviewServiceTest {
     public void updateReviewShouldSaveUpdatedReview() {
         // Arrange
         Review review = new Review(1L, "Samsung", 9, "Updated comment", LocalDate.now(), "Psy");
+        doNothing().when(reviewValidator).validate(review);
         when(reviewRepository.findById(1L)).thenReturn(Optional.of(review));
         when(reviewRepository.save(review)).thenReturn(review);
 
@@ -86,7 +108,20 @@ public class ReviewServiceTest {
 
         // Assert
         assertEquals(review, result);
+        verify(reviewValidator).validate(review);
         verify(reviewRepository).save(review);
+    }
+
+    // Update review - Invalid input
+    @Test
+    public void updateReviewShouldThrowExceptionWhenInvalid() {
+        // Arrange
+        Review review = new Review(1L, "Samsung", 0, "Very bad rating", LocalDate.now(), "Psy");
+
+        doThrow(new ReviewNotValidException("Not valid input")).when(reviewValidator).validate(review);
+        
+        // Act / Assert
+        assertThrows(ReviewNotValidException.class, () -> reviewService.updateReview(1L, review));
     }
 
     // Delete review
