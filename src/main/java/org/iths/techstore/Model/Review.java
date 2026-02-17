@@ -11,10 +11,13 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "product_name")
     private String productName;
     private int rating;
     private String comment;
+    @Column(name = "review_date")
     private LocalDate reviewDate;
+    @Column(name = "reviewer_name")
     private String reviewerName;
 
     public Review() {
