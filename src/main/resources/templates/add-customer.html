@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
 
 <head>
     <meta charset="UTF-8">
@@ -8,8 +8,9 @@
 </head>
 
 <body>
+<div layout:fragment="content">
 
-<h1>Add Customer</h1>
+<h2>Add Customer</h2>
 
 <form th:action="@{/customers}"
       th:object="${customer}"
@@ -37,5 +38,6 @@
     Back
 </a>
 
+</div>
 </body>
 </html>

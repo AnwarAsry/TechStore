@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
 
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,9 @@
 
 <body>
 
-<h1>Customer Information</h1>
+<div layout:fragment="content">
+
+<h2>Customer Information</h2>
 
 <table>
 
@@ -40,6 +42,6 @@
 <a th:href="@{/customers}">
     Back
 </a>
-
+</div>
 </body>
 </html>
