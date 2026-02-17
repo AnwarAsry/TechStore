@@ -32,7 +32,7 @@ class CustomerValidatorTest {
 
     @Test
     @DisplayName("Validator should throw exception when name is null")
-    public void validatorCustomerNameNull() {
+    public void validateCustomerNameNull() {
 
         customer.setName(null);
         customer.setTelefonNumber("0701234567");
@@ -40,14 +40,6 @@ class CustomerValidatorTest {
 
         assertThrows(CustomerNotValidateException.class,
                 () -> customerValidator.validate(customer));
-    }
-
-    @Test
-    @DisplayName("Validator should throw exception when name is null")
-    public void validateCustomerNameNull() {
-
-        assertThrows(CustomerNotValidateException.class,
-                () -> customerValidator.validateCustomerName(null));
     }
 
     @Test
