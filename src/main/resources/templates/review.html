@@ -52,16 +52,18 @@
 </head>
 
 <body>
+<div layout:fragment="content">
+    <h2>Review</h2>
 
-<h2>Review</h2>
+    <div class="box">
+        <p><strong th:text="${review.productName}"></strong></p>
+        <p>Rating: <span th:text="${review.rating}"></span></p>
+        <p th:text="${review.comment}"></p>
+        <p th:text="${review.reviewerName}"></p>
+    </div>
 
-<div class="box">
-    <p><strong th:text="${review.title}"></strong></p>
-    <p>Rating: <span th:text="${review.rating}"></span></p>
-    <p th:text="${review.comment}"></p>
+    <a class="button" th:href="@{/reviews/{id}/edit(id=${review.id})}">Edit review</a>
+    <a class="button" th:href="@{/reviews}">Back to reviews ></a>
 </div>
-
-<a class="button" th:href="@{/reviews}">Back to reviews ></a>
-
 </body>
 </html>

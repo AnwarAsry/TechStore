@@ -36,36 +36,40 @@
 </head>
 
 <body>
+<div layout:fragment="content">
+    <h2>Edit review</h2>
 
-<h2>Edit review</h2>
+    <div class="box">
 
-<div class="box">
+        <form th:action="@{/reviews/{id}(id=${review.id})}" th:object="${review}" method="post">
+            <input type="hidden" name="_method" value="put">
 
-    <form th:action="@/reviews/{id}(id=${review.id})" th:object="${review}" method="post">
-        <input type="hidden" name="_method" value="put">
+            <label>Title:</label>
+            <input type="text" th:field="*{productName}"/>
 
-        <label>Title:</label>
-        <input type="text" th:field="*{title}"/>
+            <br><br>
 
-        <br><br>
+            <label>Rating:</label>
+            <input type="number" th:field="*{rating}"/>
 
-        <label>Rating:</label>
-        <input type="number" th:field="*{rating}"/>
+            <br><br>
 
-        <br><br>
+            <label>Comment:</label>
+            <textarea th:field="*{comment}"></textarea>
 
-        <label>Comment:</label>
-        <textarea th:field="*{comment}"></textarea>
+            <br>
+            <label>Reviewer:</label>
+            <textarea th:field="*{reviewerName}"></textarea>
 
-        <br><br>
+            <br><br>
 
-        <button class="button" type="submit">Update</button>
+            <button class="button" type="submit">Update</button>
 
-    </form>
+        </form>
 
+    </div>
+
+    <a class="button" th:href="@{/reviews}">Back to reviews ></a>
 </div>
-
-<a class="button" th:href="@{/reviews}">Back to reviews ></a>
-
 </body>
 </html>

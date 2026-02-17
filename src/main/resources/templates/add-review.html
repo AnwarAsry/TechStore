@@ -36,34 +36,35 @@
 </head>
 
 <body>
+<div layout:fragment="content">
+    <h2>New review</h2>
 
-<h2>New review</h2>
+    <div class="box">
+        <form th:action="@{/reviews}" method="post">
 
-<div class="box">
-<form th:action="@{/reviews} th:object="${review}" method="post"></form>
+            <label>Title:</label>
+            <input type="text" name="productName"/>
 
-        <label>Title:</label>
-        <input type="text" th:field="*{title}"/>
+            <br><br>
 
-        <br><br>
+            <label>Rating:</label>
+            <input type="number" name="rating"/>
 
-        <label>Rating:</label>
-        <input type="number" th:field="*{rating}"/>
+            <br><br>
 
-        <br><br>
+            <label>Comment:</label>
+            <textarea name="comment"></textarea>
+            <label>Reviewer:</label>
+            <textarea name="reviewerName"></textarea>
 
-        <label>Comment:</label>
-        <textarea th:field="*{comment}"></textarea>
+            <br><br>
 
-        <br><br>
+            <button class="button" type="submit">Save</button>
+        </form>
 
-        <button class="button" type="submit"></button>
+    </div>
 
-    </form>
-
+    <a class="button" th:href="@{/reviews}">Back to reviews ></a>
 </div>
-
-<a class="button" th:href="@{/reviews}">Back to reviews ></a>
-
 </body>
 </html>
